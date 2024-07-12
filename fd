@@ -1,0 +1,22 @@
+[06/02 9:14 pm] Akhila Reddy Mula
+
+#sudo firewall-cmd --permanent --add-port=12100-12600/udp
+
+ 
+
+
+#sudo firewall-cmd --permanent --add-port=5414-5416/udp
+
+
+
+#sudo firewall-cmd --permanent --add-port=12100-12600/tcp
+
+
+
+#sudo firewall-cmd --reload
+
+
+
+#sudo firewall-cmd --list-all
+
+ 
