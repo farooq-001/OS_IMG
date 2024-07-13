@@ -1,13 +1,13 @@
 #!/bin/bash
-APP_PATH=/opt/blusapphire
+APP_PATH=/opt/SNB-TECH
 LOG_PATH=/var/log
-LOG_FILE=blu-sysprep.log
+LOG_FILE=snb-tech-sysprep.log
 
 SE_CONFIG=/etc/selinux/config
 SUDOERS=/etc/sudoers
 
-BLU_USER=blusapphire
-BLU_PASSWD='123456'
+SNB_USER=babafarooq
+SNB_PASSWD='babafarooq001@'
 
 exec > >(tee -i $LOG_PATH/$LOG_FILE)
 exec 2>&1
@@ -53,19 +53,19 @@ sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 systemctl restart ssh
 
-if ! id -u $BLU_USER &>/dev/null; then
+if ! id -u $SNB_USER &>/dev/null; then
     echo ""
-    echo "Adding user $BLU_USER."
-    adduser --disabled-password --gecos "" $BLU_USER
-    echo "$BLU_USER:$BLU_PASSWD" | chpasswd
-    usermod -aG sudo $BLU_USER
+    echo "Adding user $SNB_USER."
+    adduser --disabled-password --gecos "" $SNB_USER
+    echo "$SNB_USER:$SNB_PASSWD" | chpasswd
+    usermod -aG sudo $SNB_USER
     echo ""
 fi
 
-if ! grep -q $BLU_USER "$SUDOERS"; then
+if ! grep -q $SNB_USER "$SUDOERS"; then
     echo ""
-    echo "Adding $BLU_USER user to $SUDOERS"
-    echo "$BLU_USER     ALL=(ALL)       NOPASSWD: ALL" >> $SUDOERS
+    echo "Adding $SNB_USER user to $SUDOERS"
+    echo "$SNB_USER     ALL=(ALL)       NOPASSWD: ALL" >> $SUDOERS
     echo ""
 fi
 
@@ -80,15 +80,15 @@ apt update
 
 apt -y install htop vim nano net-tools wget firewalld tar tcpdump netcat bind9-utils language-pack-en
 
-echo 'export HISTTIMEFORMAT="%y/%m/%d %T "' >> /etc/profile.d/bluprofile.sh
-echo 'export HISTSIZE=100000' >> /etc/profile.d/bluprofile.sh
-echo 'export HISTFILESIZE=100000' >> /etc/profile.d/bluprofile.sh
-chmod +x /etc/profile.d/bluprofile.sh
+echo 'export HISTTIMEFORMAT="%y/%m/%d %T "' >> /etc/profile.d/snb-profile.sh
+echo 'export HISTSIZE=100000' >> /etc/profile.d/snb-profile.sh
+echo 'export HISTFILESIZE=100000' >> /etc/profile.d/snb-profile.sh
+chmod +x /etc/profile.d/SNBprofile.sh
 
 systemctl enable firewalld
 systemctl start firewalld
 
-mkdir -p /opt/blusapphire
-touch /opt/blusapphire/.sysprep
+mkdir -p /opt/SNB-TECH
+touch /opt/SNB-TECH/.sysprep
 echo "Sysprep completed."
 echo ""
