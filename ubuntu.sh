@@ -1,13 +1,13 @@
 #!/bin/bash
-APP_PATH=/opt/SNB-TECH
+APP_PATH=/opt/snb-tech
 LOG_PATH=/var/log
 LOG_FILE=snb-tech-sysprep.log
 
 SE_CONFIG=/etc/selinux/config
 SUDOERS=/etc/sudoers
 
-SNB_USER=babafarooq
-SNB_PASSWD='babafarooq001@'
+SNB_USER=snb-tech
+SNB_PASSWD='Sanem25-AUG1999'
 
 exec > >(tee -i $LOG_PATH/$LOG_FILE)
 exec 2>&1
@@ -80,15 +80,15 @@ apt update
 
 apt -y install htop vim nano net-tools wget firewalld tar tcpdump netcat bind9-utils language-pack-en
 
-echo 'export HISTTIMEFORMAT="%y/%m/%d %T "' >> /etc/profile.d/snb-profile.sh
-echo 'export HISTSIZE=100000' >> /etc/profile.d/snb-profile.sh
-echo 'export HISTFILESIZE=100000' >> /etc/profile.d/snb-profile.sh
-chmod +x /etc/profile.d/SNBprofile.sh
+echo 'export HISTTIMEFORMAT="%y/%m/%d %T "' >> /etc/profile.d/snb-tech-profile.sh
+echo 'export HISTSIZE=100000' >> /etc/profile.d/snb-tech-profile.sh
+echo 'export HISTFILESIZE=100000' >> /etc/profile.d/snb-tech-profile.sh
+chmod +x /etc/profile.d/snb-tech-profile.sh
 
 systemctl enable firewalld
 systemctl start firewalld
 
-mkdir -p /opt/SNB-TECH
-touch /opt/SNB-TECH/.sysprep
+mkdir -p /opt/snb-tech
+touch /opt/snb-tech/.sysprep
 echo "Sysprep completed."
 echo ""
